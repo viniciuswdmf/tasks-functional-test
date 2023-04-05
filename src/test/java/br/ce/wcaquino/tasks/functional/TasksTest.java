@@ -15,10 +15,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class TasksTest {
 	
 	public WebDriver acessarAplicacao() throws MalformedURLException {
-	    //System.setProperty("webdriver.chrome.driver", "C:\\Users\\vinicius.jacques\\jenkinstest\\seleniumDrivers\\chromedriver.exe");
-		//WebDriver driver = new ChromeDriver();
-		DesiredCapabilities cap = DesiredCapabilities.chrome();
-		WebDriver driver = new RemoteWebDriver(new URL("http://192.168.90.13:4444/wd/hub"), cap);
+	    System.setProperty("webdriver.chrome.driver", "C:\\Users\\vinicius.jacques\\jenkinstest\\seleniumDrivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		//DesiredCapabilities cap = DesiredCapabilities.chrome();
+		//WebDriver driver = new RemoteWebDriver(new URL("http://192.168.90.13:4444/wd/hub"), cap);
 		driver.navigate().to("http://localhost:8001/tasks");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
@@ -116,14 +116,14 @@ public class TasksTest {
 		//inserir tarefa
 		driver.findElement(By.id("addTodo")).click();
 		driver.findElement(By.id("task")).sendKeys("Teste teste");
-		driver.findElement(By.id("dueDate")).sendKeys("");
+		driver.findElement(By.id("dueDate")).sendKeys("02/10/2050");
 		driver.findElement(By.id("saveButton")).click();
 		String mensagem = driver.findElement(By.id("message")).getText();
-		Assert.assertEquals("Fill the due date", mensagem);
+		Assert.assertEquals("Success!", mensagem);
 		
 		//remover a tarefa
 		driver.findElement(By.xpath("//a[@class='btn btn-outline-danger btn-sm']")).click();
-		Assert.assertEquals("Fill the due date", mensagem);
+		Assert.assertEquals("Success!", mensagem);
 		
 		//fechar o browser
 		} finally {
